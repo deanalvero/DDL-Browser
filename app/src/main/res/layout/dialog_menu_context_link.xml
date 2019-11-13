@@ -10,17 +10,21 @@
     android:background="?android:attr/colorBackground"
     tools:ignore="ContentDescription" >
 
-    <TextView
-        android:id="@+id/dialog_title"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:includeFontPadding="false"
-        android:padding="8dp"
-        android:ellipsize="end"
-        android:gravity="center_vertical|center_horizontal"
-        android:maxLines="1"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold" />
+        android:layout_height="64dp">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:padding="8dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+    </ScrollView>
 
     <View
         android:layout_margin="8dp"

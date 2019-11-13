@@ -1112,7 +1112,7 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
                     inputBox.setSelection(0,inputBox.getText().toString().length());
                 } else {
                     omniboxTitle.setVisibility(View.VISIBLE);
-                    omniboxTitle.setText(ninjaWebView.getTitle());
+                    omniboxTitle.setText(ninjaWebView.getUrl());
                     hideKeyboard(activity);
                 }
             }
@@ -2162,7 +2162,7 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
 
     private void updateOmnibox() {
         if (ninjaWebView == currentAlbumController) {
-            omniboxTitle.setText(ninjaWebView.getTitle());
+            omniboxTitle.setText(ninjaWebView.getUrl());
         } else {
             ninjaWebView = (NinjaWebView) currentAlbumController;
             updateProgress(ninjaWebView.getProgress());

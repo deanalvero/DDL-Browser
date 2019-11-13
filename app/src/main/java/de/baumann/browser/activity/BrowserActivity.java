@@ -2169,30 +2169,11 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
         }
     }
 
-    private void scrollChange () {
-        if (Objects.requireNonNull(sp.getBoolean("hideToolbar", true))) {
-            ninjaWebView.setOnScrollChangeListener(new NinjaWebView.OnScrollChangeListener() {
-                @Override
-                public void onScrollChange(int scrollY, int oldScrollY) {
-                    int height = (int) Math.floor(ninjaWebView.getContentHeight() * ninjaWebView.getResources().getDisplayMetrics().density);
-                    int webViewHeight = ninjaWebView.getHeight();
-                    int cutoff = height - webViewHeight - 112 * Math.round(getResources().getDisplayMetrics().density);
-                    if (scrollY > oldScrollY && cutoff >= scrollY) {
-                        hideOmnibox();
-                    } else if (scrollY < oldScrollY){
-                        showOmnibox();
-                    }
-                }
-            });
-        }
-    }
-
     @Override
     public synchronized void updateProgress(int progress) {
         progressBar.setProgress(progress);
 
         updateOmnibox();
-        scrollChange();
         HelperUnit.initRendering(contentFrame);
         ninjaWebView.requestFocus();
 

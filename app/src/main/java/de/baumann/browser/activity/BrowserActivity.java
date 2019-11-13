@@ -2575,7 +2575,7 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
         floatButton_moreView = dialogView.findViewById(R.id.floatButton_moreView);
 
         dialogTitle = dialogView.findViewById(R.id.dialog_title);
-        dialogTitle.setText(ninjaWebView.getTitle());
+        dialogTitle.setText(ninjaWebView.getUrl());
 
         menu_newTabOpen = dialogView.findViewById(R.id.menu_newTabOpen);
         menu_newTabOpen.setOnClickListener(BrowserActivity.this);

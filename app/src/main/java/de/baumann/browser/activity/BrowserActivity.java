@@ -24,6 +24,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.net.http.SslCertificate;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -2632,6 +2633,20 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
                 updateAlbum(sp.getString("favoriteURL", "https://github.com/scoute-dich/browser"));
             }
         });
+
+        dialogView.findViewById(R.id.menu_certificateViewer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideBottomSheetDialog ();
+
+                if (ninjaWebView != null) {
+                    SslCertificate sslCertificate = ninjaWebView.getCertificate();
+                    show_dialogSslCertificate(sslCertificate);
+                }
+
+            }
+        });
+
         menu_sc = dialogView.findViewById(R.id.menu_sc);
         menu_sc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2959,6 +2974,43 @@ public class BrowserActivity extends AppCompatActivity implements BrowserControl
                 }
             }
         });
+
+        bottomSheetDialog.setContentView(dialogView);
+        bottomSheetDialog.show();
+        HelperUnit.setBottomSheetBehavior(bottomSheetDialog, dialogView, BottomSheetBehavior.STATE_EXPANDED);
+    }
+
+    private void show_dialogSslCertificate(SslCertificate sslCertificate) {
+        bottomSheetDialog = new BottomSheetDialog(context);
+        View dialogView = View.inflate(context, R.layout.dialog_ssl_certificate, null);
+
+        TextView textViewIssuedToCN = dialogView.findViewById(R.id.textView_issued_to_cn);
+        TextView textViewIssuedToO = dialogView.findViewById(R.id.textView_issued_to_o);
+        TextView textViewIssuedToOU = dialogView.findViewById(R.id.textView_issued_to_ou);
+        TextView textViewIssuedByCN = dialogView.findViewById(R.id.textView_issued_by_cn);
+        TextView textViewIssuedByO = dialogView.findViewById(R.id.textView_issued_by_o);
+        TextView textViewIssuedByOU = dialogView.findViewById(R.id.textView_issued_by_ou);
+        TextView textViewIssuedOn = dialogView.findViewById(R.id.textView_issued_on);
+        TextView textViewExpiresOn = dialogView.findViewById(R.id.textView_expires_on);
+
+        SslCertificate.DName issuedTo = sslCertificate.getIssuedTo();
+        SslCertificate.DName issuedBy = sslCertificate.getIssuedBy();
+
+        if (issuedTo != null) {
+            textViewIssuedToCN.setText(issuedTo.getCName());
+            textViewIssuedToO.setText(issuedTo.getOName());
+            textViewIssuedToOU.setText(issuedTo.getUName());
+        }
+
+        if (issuedBy != null) {
+            textViewIssuedByCN.setText(issuedBy.getCName());
+            textViewIssuedByO.setText(issuedBy.getOName());
+            textViewIssuedByOU.setText(issuedBy.getUName());
+        }
+
+        textViewIssuedOn.setText(sslCertificate.getValidNotBeforeDate().toString());
+        textViewExpiresOn.setText(sslCertificate.getValidNotAfterDate().toString());
+
 
         bottomSheetDialog.setContentView(dialogView);
         bottomSheetDialog.show();

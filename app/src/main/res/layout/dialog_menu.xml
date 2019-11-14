@@ -134,6 +134,29 @@
 
 
             <LinearLayout
+                android:id="@+id/menu_certificateViewer"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:minHeight="46dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:includeFontPadding="false"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="Certificate Viewer"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/menu_closeTab"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
